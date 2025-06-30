@@ -81,14 +81,12 @@ Ikuti langkah-langkah berikut secara berurutan untuk menjalankan aplikasi di lin
 
 **10. Buat Symbolic Link untuk Storage**
     Perintah ini akan membuat "pintasan" agar file yang di-upload (seperti foto profil atau bukti servis) dapat diakses dari web.
-    
     ```bash
     php artisan storage:link
     ```
 
 **11. Jalankan Server Development**
     Terakhir, jalankan server lokal Laravel.
-    
     ```bash
     php artisan serve
     ```
