@@ -57,7 +57,7 @@ BengkelKita adalah sistem manajemen bengkel mobil modern berbasis web yang diran
 9. **Jalankan aplikasi lokal**:
     ```bash
     php artisan serve
-       ```
+    ```
 
 10. Aplikasi akan dapat diakses biasanya di
     ```bash
