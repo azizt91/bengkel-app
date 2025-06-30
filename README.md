@@ -1,8 +1,9 @@
 <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
 
-                    <div class="flex-shrink-0">
-                        <a href="/" class="text-2xl font-bold text-white">Bengkel<span class="text-red-500">Kita</span></a>
-                    </div>
+<svg xmlns="http://www.w3.org/2000/svg" width="180" height="40" viewBox="0 0 220 40">
+  <text x="0" y="28" font-family="Verdana" font-size="28" fill="white">Bengkel</text>
+  <text x="115" y="28" font-family="Verdana" font-size="28" fill="red" font-weight="bold">Kita</text>
+</svg>
 
 <p align="center">
 <a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
