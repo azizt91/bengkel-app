@@ -65,12 +65,14 @@ Ikuti langkah-langkah berikut secara berurutan untuk menjalankan aplikasi di lin
 **8. Konfigurasi Koneksi Database**
    Buka file `.env` dan sesuaikan konfigurasinya agar cocok dengan database yang telah Anda siapkan pada langkah sebelumnya.
    ```env
+   APP_NAME=Laravel # <-- Ganti dengan nama aplikasi (BengkelKita)
+    
    DB_CONNECTION=mysql
    DB_HOST=127.0.0.1
    DB_PORT=3306
-   DB_DATABASE=laravel        # <-- Ganti dengan nama database Anda
-   DB_USERNAME=root            # <-- Ganti dengan username database Anda
-   DB_PASSWORD=               # <-- Ganti dengan password database Anda (kosongkan jika tidak ada)
+   DB_DATABASE=laravel # <-- Ganti dengan nama database Anda
+   DB_USERNAME=root # <-- Ganti dengan username database Anda
+   DB_PASSWORD=     # <-- Ganti dengan password database Anda (kosongkan jika tidak ada)
    ```
 
 **9. Compile Aset Frontend**
