@@ -25,7 +25,7 @@ Ikuti langkah-langkah berikut secara berurutan untuk menjalankan aplikasi di lin
 **1. Clone Repository**
    Buka terminal atau Git Bash, lalu jalankan perintah berikut untuk mengunduh kode sumber proyek.
    ```bash
-   git clone [https://github.com/azizt91/bengkel-app.git](https://github.com/azizt91/bengkel-app.git)
+   git clone https://github.com/azizt91/bengkel-app.git
    ```
 
 **2. Masuk ke Direktori Proyek**
@@ -68,7 +68,7 @@ Ikuti langkah-langkah berikut secara berurutan untuk menjalankan aplikasi di lin
    DB_CONNECTION=mysql
    DB_HOST=127.0.0.1
    DB_PORT=3306
-   DB_DATABASE=bengkelkita_db  # <-- Ganti dengan nama database Anda
+   DB_DATABASE=laravel        # <-- Ganti dengan nama database Anda
    DB_USERNAME=root            # <-- Ganti dengan username database Anda
    DB_PASSWORD=               # <-- Ganti dengan password database Anda (kosongkan jika tidak ada)
    ```
