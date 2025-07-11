@@ -145,7 +145,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>Bengkel Servis Mobil Profesional</title>
+        <title>Nabilla Jaya Motor</title>
 
         <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.bunny.net">
@@ -290,7 +290,7 @@
                     <!-- Anda bisa menambahkan link sosial media di sini -->
                 </div>
                  <div class="mt-8 text-center text-base text-gray-400">
-                    &copy; {{ date('Y') }} BengkelKita. Semua Hak Cipta Dilindungi.
+                    &copy; {{ date('Y') }} Nabilla Jaya Motor. Semua Hak Cipta Dilindungi.
                 </div>
                 <div class="mt-4 text-center text-sm text-gray-500 dark:text-gray-400">
                     Laravel v{{ Illuminate\Foundation\Application::VERSION }} (PHP v{{ PHP_VERSION }})
