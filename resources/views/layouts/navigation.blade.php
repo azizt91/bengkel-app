@@ -136,9 +136,6 @@
                 <x-responsive-nav-link :href="route('admin.bookings.index')" :active="request()->routeIs('admin.bookings.*')">
                     Bookings
                 </x-responsive-nav-link>
-                <x-responsive-nav-link :href="route('admin.spare-parts.index')" :active="request()->routeIs('admin.spare-parts.*')">
-                        Spare Parts
-                </x-responsive-nav-link>
                 <x-responsive-nav-link :href="route('admin.technicians.index')" :active="request()->routeIs('admin.technicians.*')">
                     Technicians
                 </x-responsive-nav-link>
