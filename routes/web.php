@@ -97,6 +97,7 @@ Route::middleware(['auth','role:pelanggan'])->prefix('customer')->name('customer
 
     // vehicles CRUD
     Route::resource('vehicles', \App\Http\Controllers\Customer\VehicleController::class);
+    Route::post('vehicles/{vehicle}/regenerate-qr', [\App\Http\Controllers\Customer\VehicleController::class, 'regenerateQr'])->name('vehicles.regenerate-qr');
 
     // bookings
     Route::get('bookings', [\App\Http\Controllers\Customer\BookingController::class, 'index'])->name('bookings.index');
@@ -118,5 +119,8 @@ Route::middleware(['auth','role:pelanggan'])->prefix('customer')->name('customer
 Route::get('/admin/filament-technicians', [App\Http\Controllers\Admin\TechnicianController::class, 'index'])
     ->middleware(['auth','role:admin'])
     ->name('filament.admin.resources.technicians.index');
+
+// Public vehicle tracking by QR token
+Route::middleware('throttle:60,1')->get('/track/{token}', \App\Http\Controllers\VehicleTrackController::class)->name('vehicle.track');
 
 require __DIR__.'/auth.php';

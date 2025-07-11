@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 29 Jun 2025 pada 07.02
+-- Waktu pembuatan: 11 Jul 2025 pada 11.57
 -- Versi server: 10.4.27-MariaDB
 -- Versi PHP: 8.2.0
 
@@ -104,7 +104,8 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (22, '2025_06_26_194900_add_custom_request_to_service_bookings_table', 6),
 (23, '2025_06_26_201300_add_estimated_duration_to_service_bookings_table', 7),
 (24, '2025_06_26_215500_add_proof_path_to_payments_table', 8),
-(25, '2025_06_28_134500_add_awaiting_review_status_to_service_bookings', 9);
+(25, '2025_06_28_134500_add_awaiting_review_status_to_service_bookings', 9),
+(26, '2025_07_11_081500_create_qr_scans_table', 10);
 
 -- --------------------------------------------------------
 
@@ -220,6 +221,22 @@ CREATE TABLE `personal_access_tokens` (
 -- --------------------------------------------------------
 
 --
+-- Struktur dari tabel `qr_scans`
+--
+
+CREATE TABLE `qr_scans` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `vehicle_id` bigint(20) UNSIGNED NOT NULL,
+  `token` char(36) NOT NULL,
+  `ip_address` varchar(45) DEFAULT NULL,
+  `user_agent` varchar(512) DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Struktur dari tabel `reviews`
 --
 
@@ -311,7 +328,7 @@ INSERT INTO `service_bookings` (`id`, `booking_code`, `customer_id`, `vehicle_id
 (3, 'XB2UBWWC', 2, 2, 3, NULL, 2, '2025-06-26', 240, NULL, 'completed', NULL, '500000.00', NULL, 'paid', NULL, '2025-06-26 06:40:49', '2025-06-26 07:38:01'),
 (4, 'ZBEA0EAW', 1, 1, 2, NULL, 1, '2025-06-27', 180, NULL, 'completed', NULL, '60000.00', NULL, 'unpaid', 'Service bulanan', '2025-06-26 21:08:42', '2025-06-26 23:47:43'),
 (5, 'GR70PD4G', 2, 2, 1, NULL, 1, '2025-06-28', 45, NULL, 'completed', NULL, '440000.00', NULL, 'paid', 'Ganti kampas rem depan', '2025-06-27 23:00:59', '2025-06-28 02:17:34'),
-(6, 'W6HO54Y1', 2, 2, 8, 'Ganti Ban', 1, '2025-06-28', 60, NULL, 'pending', NULL, NULL, NULL, 'unpaid', NULL, '2025-06-28 06:02:40', '2025-06-28 06:15:01');
+(6, 'W6HO54Y1', 2, 2, 8, 'Ganti Ban', 1, '2025-06-28', 60, NULL, 'completed', NULL, '600000.00', NULL, 'unpaid', 'Ganti Ban Selesai', '2025-06-28 06:02:40', '2025-06-28 23:11:20');
 
 -- --------------------------------------------------------
 
@@ -371,7 +388,8 @@ INSERT INTO `service_details` (`id`, `booking_id`, `spare_part_id`, `description
 (3, 4, 20, 'Oli Gardan 80W-90 1L', 1, '60000.00', '60000.00', 'part', '2025-06-26 23:47:43', '2025-06-26 23:47:43'),
 (11, 5, NULL, 'Ganti Oli & Filter', 1, '200000.00', '200000.00', 'labor', '2025-06-28 02:02:20', '2025-06-28 02:02:20'),
 (12, 5, 7, 'Kampas Rem Depan', 1, '220000.00', '220000.00', 'part', '2025-06-28 02:02:20', '2025-06-28 02:02:20'),
-(13, 5, NULL, 'Jasa Ganti Kampas Rem', 1, '20000.00', '20000.00', 'labor', '2025-06-28 02:02:20', '2025-06-28 02:02:20');
+(13, 5, NULL, 'Jasa Ganti Kampas Rem', 1, '20000.00', '20000.00', 'labor', '2025-06-28 02:02:20', '2025-06-28 02:02:20'),
+(14, 6, NULL, 'Lain-lain (Custom)', 1, '600000.00', '600000.00', 'labor', '2025-06-28 23:11:20', '2025-06-28 23:11:20');
 
 -- --------------------------------------------------------
 
@@ -548,6 +566,7 @@ CREATE TABLE `vehicles` (
   `color` varchar(255) DEFAULT NULL,
   `chassis_number` varchar(255) DEFAULT NULL,
   `engine_number` varchar(255) DEFAULT NULL,
+  `qr_token` char(36) NOT NULL,
   `last_service_date` date DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
@@ -558,9 +577,10 @@ CREATE TABLE `vehicles` (
 -- Dumping data untuk tabel `vehicles`
 --
 
-INSERT INTO `vehicles` (`id`, `customer_id`, `license_plate`, `brand`, `model`, `year`, `engine_type`, `transmission_type`, `color`, `chassis_number`, `engine_number`, `last_service_date`, `created_at`, `updated_at`, `vehicle_type_id`) VALUES
-(1, 1, 'G6632KM', 'Honda', 'Honda Brio', 2017, NULL, NULL, 'Merah', NULL, NULL, NULL, '2025-06-24 21:57:46', '2025-06-24 21:57:46', NULL),
-(2, 2, 'A1234BC', 'Toyota', 'Toyota Kijang', 2010, NULL, NULL, 'Hitam', NULL, NULL, NULL, '2025-06-25 03:44:04', '2025-06-25 03:44:04', NULL);
+INSERT INTO `vehicles` (`id`, `customer_id`, `license_plate`, `brand`, `model`, `year`, `engine_type`, `transmission_type`, `color`, `chassis_number`, `engine_number`, `qr_token`, `last_service_date`, `created_at`, `updated_at`, `vehicle_type_id`) VALUES
+(1, 1, 'G6632KM', 'Honda', 'Honda Brio', 2017, NULL, NULL, 'Merah', NULL, NULL, '', NULL, '2025-06-24 21:57:46', '2025-06-24 21:57:46', NULL),
+(2, 2, 'A1234BC', 'Toyota', 'Toyota Kijang', 2010, NULL, NULL, 'Hitam', NULL, NULL, '', NULL, '2025-06-25 03:44:04', '2025-06-25 03:44:04', NULL),
+(4, 1, 'G4321HI', 'BYD', 'BYD SEAL', 2024, NULL, NULL, 'Blue', NULL, NULL, '08419aec-eace-4717-b091-590ba9318246', NULL, '2025-07-11 01:34:43', '2025-07-11 01:34:43', NULL);
 
 -- --------------------------------------------------------
 
@@ -651,6 +671,13 @@ ALTER TABLE `personal_access_tokens`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `personal_access_tokens_token_unique` (`token`),
   ADD KEY `personal_access_tokens_tokenable_type_tokenable_id_index` (`tokenable_type`,`tokenable_id`);
+
+--
+-- Indeks untuk tabel `qr_scans`
+--
+ALTER TABLE `qr_scans`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `qr_scans_vehicle_id_foreign` (`vehicle_id`);
 
 --
 -- Indeks untuk tabel `reviews`
@@ -772,7 +799,7 @@ ALTER TABLE `failed_jobs`
 -- AUTO_INCREMENT untuk tabel `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 
 --
 -- AUTO_INCREMENT untuk tabel `payments`
@@ -790,6 +817,12 @@ ALTER TABLE `permissions`
 -- AUTO_INCREMENT untuk tabel `personal_access_tokens`
 --
 ALTER TABLE `personal_access_tokens`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT untuk tabel `qr_scans`
+--
+ALTER TABLE `qr_scans`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
@@ -820,7 +853,7 @@ ALTER TABLE `service_categories`
 -- AUTO_INCREMENT untuk tabel `service_details`
 --
 ALTER TABLE `service_details`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT untuk tabel `service_progress`
@@ -856,7 +889,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT untuk tabel `vehicles`
 --
 ALTER TABLE `vehicles`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT untuk tabel `vehicle_types`
@@ -891,6 +924,12 @@ ALTER TABLE `model_has_roles`
 --
 ALTER TABLE `payments`
   ADD CONSTRAINT `payments_booking_id_foreign` FOREIGN KEY (`booking_id`) REFERENCES `service_bookings` (`id`) ON DELETE CASCADE;
+
+--
+-- Ketidakleluasaan untuk tabel `qr_scans`
+--
+ALTER TABLE `qr_scans`
+  ADD CONSTRAINT `qr_scans_vehicle_id_foreign` FOREIGN KEY (`vehicle_id`) REFERENCES `vehicles` (`id`) ON DELETE CASCADE;
 
 --
 -- Ketidakleluasaan untuk tabel `reviews`

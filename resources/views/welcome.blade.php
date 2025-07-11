@@ -170,7 +170,7 @@
             <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="flex items-center justify-between h-16">
                     <div class="flex-shrink-0">
-                        <a href="/" class="text-2xl font-bold text-white">Bengkel<span class="text-red-500">Kita</span></a>
+                        <a href="/" class="text-2xl font-bold text-white">Nabilla <span class="text-red-500">Jaya Motor</span></a>
                     </div>
                     @if (Route::has('login'))
                         <div class="p-6 text-right">

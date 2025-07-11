@@ -14,7 +14,7 @@
 </head>
 <body>
     <div class="header">
-        <h2>BengkelKita Invoice</h2>
+        <h2>Nabilla Jaya Motor Invoice</h2>
     </div>
 
     <p><strong>Invoice Code:</strong> {{ $booking->booking_code }}</p>

@@ -27,6 +27,7 @@
                         <td class="px-4 py-2">{{ $vehicle->model }}</td>
                         <td class="px-4 py-2">{{ $vehicle->year }}</td>
                         <td class="px-4 py-2 space-x-2">
+                            <a href="{{ route('customer.vehicles.show', $vehicle) }}" class="text-indigo-600">View</a>
                             <a href="{{ route('customer.vehicles.edit', $vehicle) }}" class="text-blue-600">Edit</a>
                             <form action="{{ route('customer.vehicles.destroy', $vehicle) }}" method="POST" class="inline" onsubmit="return confirm('Delete?')">
                                 @csrf @method('DELETE')

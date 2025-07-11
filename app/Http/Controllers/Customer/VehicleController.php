@@ -33,10 +33,18 @@ class VehicleController extends Controller
         ]);
 
         $validated['customer_id'] = auth()->user()->customer->id;
+        $validated['qr_token'] = \Illuminate\Support\Str::uuid();
 
-        \App\Models\Vehicle::create($validated);
+        /** @var \App\Models\Vehicle $vehicle */
+        $vehicle = \App\Models\Vehicle::create($validated);
 
-        return redirect()->route('customer.vehicles.index')->with('success','Vehicle added');
+        // Generate QR Code PNG and store in storage/app/public/qrcodes/{id}.png
+        $qr = \SimpleSoftwareIO\QrCode\Facades\QrCode::format('svg')
+            ->size(300)
+            ->generate(route('vehicle.track', $vehicle->qr_token));
+        \Illuminate\Support\Facades\Storage::disk('public')->put("qrcodes/{$vehicle->id}.svg", $qr);
+
+        return redirect()->route('customer.vehicles.index')->with('success','Vehicle added & QR generated');
     }
 
     public function show(Vehicle $vehicle)
@@ -71,6 +79,21 @@ class VehicleController extends Controller
         $this->authorizeVehicle($vehicle);
         $vehicle->delete();
         return redirect()->route('customer.vehicles.index')->with('success','Vehicle deleted');
+    }
+
+    public function regenerateQr(Vehicle $vehicle)
+    {
+        $this->authorizeVehicle($vehicle);
+        // generate new token & qr
+        $vehicle->qr_token = \Illuminate\Support\Str::uuid();
+        $vehicle->save();
+
+        $qr = \SimpleSoftwareIO\QrCode\Facades\QrCode::format('svg')
+            ->size(300)
+            ->generate(route('vehicle.track', $vehicle->qr_token));
+        \Illuminate\Support\Facades\Storage::disk('public')->put("qrcodes/{$vehicle->id}.svg", $qr);
+
+        return back()->with('success','QR regenerated');
     }
 
     private function authorizeVehicle(Vehicle $vehicle): void

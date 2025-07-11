@@ -20,6 +20,7 @@ class Vehicle extends Model
         'color',
         'chassis_number',
         'engine_number',
+        'qr_token',
         'last_service_date',
         'vehicle_type_id',
     ];
